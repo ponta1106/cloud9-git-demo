@@ -1,0 +1,49 @@
+@import "bootstrap";
+
+body {
+  color: #555;
+  background: #eee;
+}
+
+.top-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  font-family: "Ricty-diminished";
+  background: linear-gradient(rgba(50, 50, 50, 0.5), rgba(50, 50, 50, 0.5)) ,url("top.jpg");
+  background-size: cover;
+  height: 100vh;
+  margin-top: -56px;
+  padding-top: 56px;
+}
+
+.top-image .title {
+  max-width: 800px;
+  display: flex;
+  flex-flow: column;
+}
+
+.top-image h1 {
+  font-size: 160px;
+}
+
+.top-image p {
+  font-size: 24px;
+}
+
+.top-image .start {
+  display: flex;
+  justify-content: space-around;
+}
+
+.index-image {
+  border-radius: 50%;
+}
+
+.profile-image {
+  display: block;
+  width: 300px;
+  margin: 0 auto;
+}

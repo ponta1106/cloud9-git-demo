@@ -1,0 +1,76 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-4 mx-auto">
+      <div class="card">
+        <div class="card-body">
+         <%= attachment_image_tag @user, :image, :fill, 300, 300, fallback: "no_image.jpg", size:'300x300',  class: "profile-image"  %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= @user.name %></h5>
+          <p><%= @user.profile %></p>
+          <p class="card-subtitle mb-2 text-muted"><%= @user.prefecture %>, <%= @user.city %></p>
+          <% if current_user.id == @user.id %>
+            <h6 class="card-subtitle mb-2 text-muted mb-5 mr-2"><%= @user.email %></h6>
+            <%= link_to 'ユーザーを編集', edit_user_path(@user), class: "btn btn-success mr-2" %>
+            <%= link_to 'ユーザーを削除', user_path(@user), class: "btn btn-danger", method: :delete, data: {confirm: "本当に削除しますか？" }  %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-8 mx-auto">
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" colspan="2"><%="#{@user.name}さんが見つけたゴミ" %></th>
+            <th scope="col">都道府県</th>
+            <th scope="col">市区町村</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @user.trashes.exists? %>
+            <% @user.trashes.each do |trash| %>
+              <tr>
+                <td><%= attachment_image_tag trash, :trash_image, :fill, 50, 50, fallback: "no_image.jpg", size:'50x50', class: "image" %></td>
+                <td><%= link_to trash.title, trash_path(trash) %></td>
+                <td><%= trash.prefecture %></td>
+                <td><%= trash.city %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <td>まだ投稿してません。<%= link_to "見つけたゴミを投稿する", trash_path, class: "btn btn-success" %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          <% end %>
+        </tbody>
+      </table>
+      
+      <table class="table table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" colspan="2"><%="#{@user.name}さんが拾ったゴミ" %></th>
+            <th scope="col">都道府県</th>
+            <th scope="col">市区町村</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if @user.pick_ups.exists? %>
+            <% @user.pick_ups.each do |pickup| %>
+              <tr>
+                <td><%= attachment_image_tag pickup, :pick_up_image, :fill, 50, 50, fallback: "no_image.jpg", size:'50x50', class: "image" %></td>
+                <td><%= link_to pickup.title, pick_up_path(pickup) %></td>
+                <td><%= pickup.prefecture %></td>
+                <td><%= pickup.city %></td>
+              </tr>
+            <% end %>
+          <% else %>
+            <td>まだ投稿してません。<%= link_to "拾ったゴミを投稿する", new_pick_up_path, class: "btn btn-success" %></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

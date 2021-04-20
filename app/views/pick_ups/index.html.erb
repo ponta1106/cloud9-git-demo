@@ -1,0 +1,29 @@
+<div class="col-12 mx-auto mt-5">
+  <div class="container">
+  <h3>拾ったゴミ一覧</h3>
+    <div class="row mt-3">
+      <% @pick_ups.each do |pick_up| %>
+        <div class="col-4 mx-auto">
+          <div class="card mb-5">
+            <div class="card-body">
+              <%= link_to pick_up_path(pick_up) do %>
+                <%= attachment_image_tag pick_up, :pick_up_image, :fill, 300, 300, fallback: "no_image.jpg", size:'320x300', class: "image" %>
+              <% end %>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><%= pick_up.title %></h5>
+              <% if pick_up.pick_up_profile? %>
+                <p><%= pick_up.pick_up_profile %></p>
+              <% else %>
+                <p>コメントなし。</p>
+              <% end %>
+              <p><%= attachment_image_tag pick_up.user, :image, fallback: "no_image.jpg", size:'50x50',  class: "image" %><%= link_to pick_up.user.name, user_path(pick_up.user) %></p>
+              <p class="card-subtitle mb-2 text-muted"><%= pick_up.prefecture %>, <%= pick_up.city %></p>
+              <p><%= pick_up.updated_at.strftime("%Y年%m月%d日 %H時%M分") %></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

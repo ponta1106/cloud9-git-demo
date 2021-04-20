@@ -1,0 +1,56 @@
+<% if @user.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading"><%= pluralize(@user.errors.count, "error") %></h4>
+    <p><%= pluralize(@user.errors.count, "error") %> prohibited this object from being saved: not successfully</p>
+    <hr>
+    <p class="mb-0">
+      <% @user.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </p>
+  </div>
+<% end %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <h2>編集</h2>
+      <%= form_for @user do |f| %>
+        <div class="form-group">
+          <%= f.label :"名前" %><br />
+          <%= f.text_field :name, autofocus: true, autocomplete: "name", class: "form-control" %>
+        </div>
+      
+        <div class="form-group">
+          <%= f.label :"都道府県" %><br />
+          <%= f.text_field :prefecture, autofocus: true, autocomplete: "prefecture", class: "form-control" %>
+        </div>
+      
+        <div class="form-group">
+          <%= f.label :"市区町村" %><br />
+          <%= f.text_field :city, autofocus: true, autocomplete: "city", class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <%= f.label :"自己紹介" %><br />
+          <%= f.text_area :profile, autofocus: true, autocomplete: "profile", class: "form-control" %>
+        </div>
+        
+        <div class="form-group">
+          <label>メールアドレス</label>
+          <%= f.email_field :email, class: "form-control" %>
+        </div>
+        
+        <div class="field">
+          <%= f.label :image, "プロフィール画像", class: "label" %>
+          <%= f.attachment_field :image, class: "input" %>
+        </div>
+        
+        <div>
+          <%= f.submit "ユーザー情報を更新", class: "btn btn-primary" %>
+        </div>
+        
+      <% end %>
+    </div>
+  </div>
+</div>

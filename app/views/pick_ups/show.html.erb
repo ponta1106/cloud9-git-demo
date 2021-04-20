@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <h3><%= @pick_up.user.name %>さんの拾ったゴミ</h3>
+  <div class="row">
+    <div class="col-4 mx-auto">
+      <div class="card">
+        <div class="card-body">
+         <%= attachment_image_tag @pick_up, :pick_up_image, :fill, 200, 200, fallback: "no_image.jpg", size:'300x300', class: "image" %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= @pick_up.title %></h5>
+          <p><%= @pick_up.pick_up_profile %></p>
+          <p class="card-subtitle mb-2 text-muted mb-5"><%= @pick_up.prefecture %>, <%= @pick_up.city %>, <%= @pick_up.created_at.strftime("%Y年%m月%d日") %></p>
+          <% if current_user.id == @pick_up.user_id %>
+            <%= link_to '編集', edit_pick_up_path(@pick_up), class: "btn btn-success mr-2" %>
+            <%= link_to '削除', pick_up_path(@pick_up), class: "btn btn-danger", method: :delete, data: {confirm: "本当に削除しますか？" }  %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

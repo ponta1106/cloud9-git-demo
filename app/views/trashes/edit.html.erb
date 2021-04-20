@@ -1,0 +1,50 @@
+<% if @trash.errors.any? %>
+  <div class="alert alert-danger" role="alert">
+    <h4 class="alert-heading"><%= pluralize(@trash.errors.count, "error") %></h4>
+    <p><%= pluralize(@trash.errors.count, "error") %> prohibited this object from being saved: not successfully</p>
+    <hr>
+    <p class="mb-0">
+      <% @trash.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </p>
+  </div>
+<% end %>
+
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-6 mx-auto">
+      <h2>見つけたゴミを編集</h2>
+        <%= form_for @trash do |f| %>
+          <div class="form-group">
+            <%= f.label :"見つけたゴミ" %>
+            <%= f.text_field :title, class: "form-control" %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.label :"都道府県" %>
+            <%= f.text_field :prefecture, class: "form-control" %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.label :"市区町村" %>
+            <%= f.text_field :city, class: "form-control" %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.label :"詳細" %>
+            <%= f.text_area :trash_profile, class: "form-control" %>
+          </div>
+          
+          <div class="form-group">
+            <%= f.label :trash_image, "写真", class: "label" %>
+            <%= f.attachment_field :trash_image, class: "input" %>
+          </div>
+          
+          <div>
+            <%= f.submit "更新", class: "btn btn-primary" %>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>

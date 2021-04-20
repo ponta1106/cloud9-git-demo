@@ -1,0 +1,29 @@
+<div class="col-9 mx-auto mt-5">
+  <h3>ユーザー一覧</h3>
+  <table class="table table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th colspan="2" scope="col">ユーザー</th>
+        <th scope="col">プロフィール</th>
+        <th scope="col">都道府県</th>
+        <th scope="col">市区町村</th>
+        <th scope="col">見つけたゴミの数</th>
+        <th scope="col">拾ったゴミの数</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+       <tr>
+        <td style="width: 10%;"><%= attachment_image_tag user, :image, :fill, 200, 200, fallback: "no_image.jpg", size:'50x50', class: "index-image" %></td>
+        <td><%= link_to user.name, user_path(user) %></td>
+        <td><%= user.profile %></td>
+        <td><%= user.prefecture %></td>
+        <td><%= user.city %></td>
+        <td><%= link_to "#{user.trashes.count}件", user_path(user) %></td>
+        <td><%= link_to "#{user.pick_ups.count}件", user_path(user) %></td>
+       </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+ 

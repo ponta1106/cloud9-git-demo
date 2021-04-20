@@ -1,0 +1,21 @@
+<div class="container mt-5">
+  <h3><%= @trash.user.name %>さんの見つけたゴミ</h3>
+  <div class="row">
+    <div class="col-4 mx-auto">
+      <div class="card">
+        <div class="card-body">
+         <%= attachment_image_tag @trash, :trash_image, :fill, 200, 200, fallback: "no_image.jpg", size:'300x300', class: "image" %>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title"><%= @trash.title %></h5>
+          <p><%= @trash.trash_profile %></p>
+          <p class="card-subtitle mb-2 text-muted mb-5"><%= @trash.prefecture %>, <%= @trash.city %>, <%= @trash.created_at.strftime("%Y年%m月%d日") %></p>
+          <% if current_user.id == @trash.user_id %>
+            <%= link_to '編集', edit_trash_path(@trash), class: "btn btn-success mr-2" %>
+            <%= link_to '削除', trash_path(@trash), class: "btn btn-danger", method: :delete, data: {confirm: "本当に削除しますか？" }  %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
